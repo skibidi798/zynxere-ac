@@ -8,16 +8,14 @@
     "description": "Zynxere Floating AC Controller Overlay",
     "icons": [
         {
-            "src": "https://www.pwabuilder.com/assets/images/icon_192.png",
+            "src": "icon192.png",
             "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any"
+            "type": "image/png"
         },
         {
-            "src": "https://www.pwabuilder.com/assets/images/icon_512.png",
+            "src": "icon512.png",
             "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any"
+            "type": "image/png"
         }
     ]
 }
