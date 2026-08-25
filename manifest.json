@@ -1,19 +1,20 @@
 {
     "name": "Zynxere Monster Clicker",
     "short_name": "Zynxere Clicker",
-    "start_url": "./index.html",
+    "start_url": "/zynxere-ac/",
     "display": "standalone",
     "background_color": "#121212",
     "theme_color": "#121212",
+    "description": "An awesome monster clicker game by Zynxere",
     "icons": [
         {
-            "src": "https://via.placeholder.com/192",
+            "src": "https://raw.githubusercontent.com/skibidi798/zynxere-ac/main/icon.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "any"
         },
         {
-            "src": "https://via.placeholder.com/512",
+            "src": "https://raw.githubusercontent.com/skibidi798/zynxere-ac/main/icon.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any"
