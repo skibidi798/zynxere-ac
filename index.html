@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zynxere Monster Clicker</title>
+    <style>
+        body { background: #121212; color: #fff; font-family: sans-serif; text-align: center; padding-top: 50px; }
+        #clicker { font-size: 3rem; background: #ff4757; border: none; border-radius: 50%; width: 180px; height: 180px; color: white; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.5); margin: 20px auto; }
+        #clicker:active { transform: scale(0.95); }
+        .score { font-size: 2.2rem; color: #2ed573; margin-bottom: 10px; }
+        .cps { font-size: 1.2rem; color: #ffa502; margin-bottom: 20px; }
+        button.turbo { background: #2ed573; font-size: 1rem; border-radius: 8px; padding: 10px 20px; color: #000; font-weight: bold; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Zynxere Monster Clicker 👾</h1>
+    <div class="score">Score: <span id="score">0</span></div>
+    <div class="cps">CPS: <span id="cpsDisplay">0</span></div>
+    
+    <button id="clicker" onclick="manualClick()">CLICK!</button>
+    <br>
+    <button class="turbo" onclick="toggleTurbo()">Toggle 15K Turbo AC: OFF</button>
+
+    <script>
+        let score = 0;
+        let turboActive = false;
+        let turboInterval = null;
+        let currentCPS = 0;
+        let clickCounts = 0;
+
+        function manualClick() {
+            score++;
+            clickCounts++;
+            updateDisplay();
+        }
+
+        function toggleTurbo() {
+            turboActive = !turboActive;
+            const btn = document.querySelector('.turbo');
+            
+            if (turboActive) {
+                btn.innerText = "Toggle 15K Turbo AC: ON 🔥";
+                // Adds 150 score every 10ms = exactly 15,000 clicks per second!
+                turboInterval = setInterval(() => {
+                    score += 150; 
+                    clickCounts += 150;
+                    updateDisplay();
+                }, 10);
+            } else {
+                btn.innerText = "Toggle 15K Turbo AC: OFF";
+                clearInterval(turboInterval);
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('score').innerText = score;
+        }
+
+        // Calculate actual CPS every second
+        setInterval(() => {
+            currentCPS = clickCounts;
+            clickCounts = 0;
+            document.getElementById('cpsDisplay').innerText = currentCPS;
+        }, 1000);
+    </script>
+</body>
+</html>
