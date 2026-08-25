@@ -2,154 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zynxere AC Controller</title>
     <link rel="manifest" href="manifest.json">
     <style>
-        body { 
-            background: #121212; 
-            color: #fff; 
-            font-family: sans-serif; 
-            text-align: center; 
-            padding-top: 30px; 
-            margin: 0;
-            overflow: hidden;
-            user-select: none;
+        * {
+            box-sizing: border-box;
         }
-        h1 { font-size: 1.5rem; color: #ff4757; margin-bottom: 5px; }
-        p { color: #888; font-size: 0.9rem; padding: 0 20px; }
-
-        /* Floating Draggable Control Circle */
-        #floating-circle {
-            position: absolute;
-            top: 150px;
-            left: 50px;
-            width: 140px;
-            height: 140px;
-            background: rgba(30, 30, 30, 0.85);
-            border: 2px solid #ff4757;
-            border-radius: 50%;
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.7);
-            touch-action: none;
-            z-index: 9999;
-            cursor: pointer;
+            overflow: hidden;
         }
-
-        /* Center Point inside the circle */
-        .center-point {
-            width: 12px;
-            height: 12px;
-            background: #2ed573;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #2ed573;
-            margin-bottom: 8px;
-        }
-
-        /* Start AC Button inside the floating widget */
-        #start-ac-btn {
-            background: #2ed573;
-            color: #000;
-            border: none;
-            border-radius: 20px;
-            padding: 6px 12px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-        }
-        #start-ac-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Status log text */
-        #status-log {
-            margin-top: 250px;
-            font-size: 1.1rem;
-            color: #ffa502;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-
-    <h1>Zynxere AC Controller</h1>
-    <p>Drag the floating circle anywhere on your screen, then tap the button to fire it up!</p>
-
-    <!-- Floating Circle with Center Point & Start AC Button -->
-    <div id="floating-circle">
-        <div class="center-point"></div>
-        <button id="start-ac-btn">Start the AC</button>
-    </div>
-
-    <div id="status-log">Status: Idle</div>
-
-    <script>
-        const floatingCircle = document.getElementById('floating-circle');
-        const startAcBtn = document.getElementById('start-ac-btn');
-        const statusLog = document.getElementById('status-log');
-
-        let isDragging = false;
-        let startX, startY, initialX, initialY;
-
-        // Touch and Mouse Drag Handlers for the Floating Circle
-        function dragStart(e) {
-            isDragging = true;
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            
-            startX = clientX;
-            startY = clientY;
-            
-            initialX = floatingCircle.offsetLeft;
-            initialY = floatingCircle.offsetTop;
-            
-            e.stopPropagation();
-        }
-
-        function dragMove(e) {
-            if (!isDragging) return;
-            
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            
-            const dx = clientX - startX;
-            const dy = clientY - startY;
-            
-            floatingCircle.style.left = `${initialX + dx}رياض` / 1 || `${initialX + dx}px`; // Clean pixel assignment
-            floatingCircle.style.top = `${initialY + dy}px`;
-            
-            e.preventDefault();
-        }
-
-        function dragEnd() {
-            isDragging = false;
-        }
-
-        // Event listeners for dragging anywhere on the circle
-        floatingCircle.addEventListener('mousedown', dragStart);
-        document.addEventListener('mousemove', dragMove);
-        document.addEventListener('mouseup', dragEnd);
-
-        floatingCircle.addEventListener('touchstart', dragStart, {passive: false});
-        document.addEventListener('touchmove', dragMove, {passive: false});
-        document.addEventListener('touchend', dragEnd);
-
-        // Start AC Action Logic
-        startAcBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent drag conflict when clicking button
-            statusLog.textContent = "Status: AC Activated & Running! 🚀";
-            statusLog.style.color = "#2ed573";
-            
-            // Add custom action code here when you want it to trigger clicks or routines!
-            if (navigator.vibrate) {
-                navigator.vibrate(100); // Quick haptic vibration feedback
-            }
-        });
-    </script>
-
-</body>
-</html>
+        /* Draggable Floating AC Control Circle */
+        #floating-ac-circle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            background
