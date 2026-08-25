@@ -1,11 +1,11 @@
 {
-    "name": "Zynxere Monster Clicker",
-    "short_name": "Zynxere Clicker",
+    "name": "Zynxere AC Controller",
+    "short_name": "Zynxere AC",
     "start_url": "/zynxere-ac/",
     "display": "standalone",
     "background_color": "#121212",
     "theme_color": "#121212",
-    "description": "An awesome monster clicker game by Zynxere",
+    "description": "Zynxere Floating AC Controller Overlay",
     "icons": [
         {
             "src": "https://www.pwabuilder.com/assets/images/icon_192.png",
