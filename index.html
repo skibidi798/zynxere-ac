@@ -6,27 +6,111 @@
     <title>Zynxere AC Controller</title>
     <link rel="manifest" href="manifest.json">
     <style>
-        * {
-            box-sizing: border-box;
-        }
         body {
             margin: 0;
             padding: 0;
-            background-color: #121212;
-            color: #ffffff;
+            background-color: #ffffff !important;
+            color: #000000 !important;
             font-family: Arial, sans-serif;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
         }
-        /* Draggable Floating AC Control Circle */
         #floating-ac-circle {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 70px;
-            height: 70px;
-            background
+            top: 30px;
+            right: 30px;
+            width: 75px;
+            height: 75px;
+            background: #ff0055;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 6px 20px rgba(255, 0, 85, 0.5);
+            cursor: pointer;
+            z-index: 9999;
+            touch-action: none;
+        }
+        .ac-controller {
+            background: #f0f0f0;
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 85%;
+            max-width: 340px;
+            border: 3px solid #ff0055;
+        }
+        .ac-controller h3 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 22px;
+            color: #ff0055;
+        }
+        .ac-btn {
+            background-color: #ff0055;
+            color: #ffffff;
+            border: none;
+            padding: 14px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .ac-btn:active {
+            transform: scale(0.95);
+            background-color: #cc0044;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="floating-ac-circle">AC</div>
+
+    <div class="ac-controller">
+        <h3>Zynxere AC Controller</h3>
+        <button id="start-ac-btn" class="ac-btn">Start the AC</button>
+    </div>
+
+    <script>
+        const circle = document.getElementById('floating-ac-circle');
+        let isDragging = false;
+        let startX, startY, initialX, initialY;
+
+        circle.addEventListener('pointerdown', (e) => {
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            const rect = circle.getBoundingClientRect();
+            initialX = rect.left;
+            initialY = rect.top;
+            circle.setPointerCapture(e.pointerId);
+        });
+
+        circle.addEventListener('pointermove', (e) => {
+            if (!isDragging) return;
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            circle.style.left = `${initialX + dx}px`;
+            circle.style.top = `${initialY + dy}px`;
+            circle.style.right = 'auto';
+        });
+
+        circle.addEventListener('pointerup', (e) => {
+            isDragging = false;
+            circle.releasePointerCapture(e.pointerId);
+        });
+
+        document.getElementById('start-ac-btn').addEventListener('click', () => {
+            alert('AC Started successfully, Zynxere!');
+        });
+    </script>
+</body>
+</html>
